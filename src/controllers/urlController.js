@@ -32,7 +32,7 @@ exports.shortenUrl = async (req, res) => {
     const shortCode = customAlias || generateShortCode();
 
     // Veriyi kaydet
-    await urlModel.save({ originalUrl, shortCode, customAlias });
+    await urlModel.save({ originalUrl, shortCode });
 
     const host = `${req.protocol}://${req.headers.host}`;
     res.json({ shortUrl: `${host}/${shortCode}` });
@@ -60,5 +60,7 @@ exports.redirectUrl = async (req, res) => {
     res.status(500).json({ error: 'Sunucu hatası' });
   }
 };
+
+
 
 
