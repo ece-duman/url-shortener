@@ -10,7 +10,18 @@ exports.findByShortCode = async (shortCode) => {
   return res.rows[0];
 };
 
-exports.save = async ({ originalUrl, shortCode }) => {
-  await db.query('INSERT INTO urls (original_url, short_code) VALUES ($1, $2)', [originalUrl, shortCode]);
+// Custom alias için sorgu fonksiyonu
+exports.findByCustomAlias = async (customAlias) => {
+  const res = await db.query('SELECT * FROM urls WHERE custom_alias = $1', [customAlias]);
+  return res.rows[0];
 };
+
+// save fonksiyonu güncellendi, artık customAlias da kaydediliyor
+exports.save = async ({ originalUrl, shortCode, customAlias }) => {
+  await db.query(
+    'INSERT INTO urls (original_url, short_code, custom_alias) VALUES ($1, $2, $3)',
+    [originalUrl, shortCode, customAlias || null]
+  );
+};
+
 

@@ -1,12 +1,15 @@
 const express = require('express');
 const app = express();
 const urlRoutes = require('./src/routes/urlRoutes');
+const analyticsRoutes = require('./src/routes/analyticsRoutes'); // Yeni eklenen
 
-// JSON gövdeyi (body) okumak için middleware
 app.use(express.json());
 
-// Tüm rotaları ana dizinde kullan
+// URL kısaltma ve yönlendirme rotaları
 app.use('/', urlRoutes);
+
+// Analytics rotaları (örneğin: /analytics/...)
+app.use('/analytics', analyticsRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server ${PORT} portunda çalışıyor`));
