@@ -26,7 +26,9 @@ exports.shortenUrl = async (req, res) => {
         const host = `${req.protocol}://${req.headers.host}`;
         return res.json({ shortUrl: `${host}/${existingEntry.short_code}` });
       }
-    }
+    }   
+
+    
 
     // Yeni kısa kod oluştur (customAlias varsa onu kullan)
     const shortCode = customAlias || generateShortCode();
